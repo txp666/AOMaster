@@ -8,7 +8,7 @@
 
 ## Project Links
 
-- OSHWHub: [https://oshwhub.com/txp666/aomaster](https://oshwhub.com/txp666/aomaster)
+- OSHWHub: [https://oshwhub.com/txp666/project_dvokplei](https://oshwhub.com/txp666/project_dvokplei)
 - Browser host: [https://modusignal.cn/](https://modusignal.cn/)
 
 ## Product Photos
