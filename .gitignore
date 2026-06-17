@@ -13,3 +13,4 @@ callgraph.dot
 .vscode/
 .mrs/
 tools/
+output/

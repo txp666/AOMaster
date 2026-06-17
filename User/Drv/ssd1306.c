@@ -5,6 +5,7 @@
 #define SSD1306_DATA 0x40
 #define SSD1306_PAGE 0xB0
 #define SSD1306_PAGES 8U
+#define SSD1306_COL_OFFSET 2U
 
 static char s_cache[SSD1306_PAGES][SSD1306_TEXT_COLS];
 static uint8_t s_cache_valid;
@@ -50,11 +51,13 @@ static void SSD1306_CacheSpaces(void)
 
 static void SSD1306_SetPageCol(uint8_t page, uint8_t col)
 {
+    uint8_t hw_col = col + SSD1306_COL_OFFSET;
+
     OLED_I2C_Start(SSD1306_I2C_ADDR);
     OLED_I2C_Write(SSD1306_CMD);
     OLED_I2C_Write(SSD1306_PAGE | page);
-    OLED_I2C_Write(col & 0x0F);
-    OLED_I2C_Write(0x10 | (col >> 4));
+    OLED_I2C_Write(hw_col & 0x0F);
+    OLED_I2C_Write(0x10 | (hw_col >> 4));
     OLED_I2C_Stop();
 }
 

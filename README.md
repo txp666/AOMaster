@@ -6,6 +6,11 @@
   </p>
 </div>
 
+## 项目链接
+
+- 嘉立创开源：[https://oshwhub.com/txp666/aomaster](https://oshwhub.com/txp666/aomaster)
+- 网页上位机：[https://modusignal.cn/](https://modusignal.cn/)
+
 ## 实物照片
 
 <table>

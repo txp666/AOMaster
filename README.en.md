@@ -6,6 +6,11 @@
   </p>
 </div>
 
+## Project Links
+
+- OSHWHub: [https://oshwhub.com/txp666/aomaster](https://oshwhub.com/txp666/aomaster)
+- Browser host: [https://modusignal.cn/](https://modusignal.cn/)
+
 ## Product Photos
 
 <table>
