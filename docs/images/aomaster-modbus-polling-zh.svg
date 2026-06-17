@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="340" viewBox="0 0 960 340" role="img" aria-labelledby="title desc">
+  <title id="title">AOMaster Modbus 轮询</title>
+  <desc id="desc">Modbus RTU 轮询读取 0x0000 到 0x0006 寄存器，并按输出模式选择 Y 轴绘制实际输出。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .label { font: 700 16px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .small { font: 12px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #64748b; }
+      .code { font: 700 13px Consolas, monospace; fill: #0f172a; }
+      .wire { stroke: #64748b; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .blue { fill: #dbeafe; stroke: #93c5fd; }
+      .green { fill: #dcfce7; stroke: #86efac; }
+      .amber { fill: #fef3c7; stroke: #fcd34d; }
+    </style>
+  </defs>
+  <rect width="960" height="340" rx="24" fill="#f8fafc"/>
+  <text x="38" y="44" class="label">Modbus RTU 轮询约定</text>
+
+  <rect x="52" y="92" width="228" height="86" rx="14" class="card"/>
+  <text x="76" y="124" class="label">上位机请求</text>
+  <text x="76" y="154" class="code">01 03 00 00 00 07 04 08</text>
+
+  <rect x="366" y="72" width="228" height="126" rx="14" class="card"/>
+  <text x="390" y="104" class="label">AOMaster 响应</text>
+  <text x="390" y="132" class="small">7 个保持寄存器</text>
+  <text x="390" y="158" class="code">0x0000 SIGNAL_TYPE</text>
+  <text x="390" y="180" class="code">0x0006 ACTUAL</text>
+
+  <rect x="690" y="92" width="220" height="86" rx="14" class="card"/>
+  <text x="714" y="124" class="label">图表更新</text>
+  <text x="714" y="150" class="small">值 = ACTUAL / 1000</text>
+
+  <path d="M 282 136 C 316 136, 330 136, 364 136" class="wire"/>
+  <path d="M 596 136 C 632 136, 650 136, 688 136" class="wire"/>
+
+  <rect x="110" y="232" width="190" height="64" rx="14" class="blue"/>
+  <text x="136" y="258" class="label">电压回包</text>
+  <text x="136" y="282" class="small">type=1，Y 轴 0..10 V</text>
+
+  <rect x="384" y="232" width="190" height="64" rx="14" class="green"/>
+  <text x="410" y="258" class="label">电流回包</text>
+  <text x="410" y="282" class="small">type=0，Y 轴 4..20 mA</text>
+
+  <rect x="658" y="232" width="190" height="64" rx="14" class="amber"/>
+  <text x="684" y="258" class="label">严格解析</text>
+  <text x="684" y="282" class="small">忽略单寄存器回包</text>
+</svg>

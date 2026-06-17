@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">AOMaster 系统概览</title>
+  <desc id="desc">系统概览，展示美上美 SIQ-02FVS3 编码器本地控制、CH32V003 固件、GP8630 模拟量输出，以及通过板载 USB-C 和 CH340N 连接网页上位机。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#e8f4f2"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; filter: url(#shadow); }
+      .chip { fill: #0f766e; }
+      .accent { fill: #2563eb; }
+      .warn { fill: #b45309; }
+      .title { font: 700 18px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 14px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #334155; }
+      .small { font: 12px "Microsoft YaHei", "Segoe UI", Arial, sans-serif; fill: #64748b; }
+      .wire { stroke: #64748b; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="960" height="360" rx="24" fill="url(#bg)"/>
+  <text x="40" y="44" class="title">AOMaster：本地模拟量源 + 网页上位机</text>
+
+  <rect x="52" y="92" width="190" height="154" rx="14" class="card"/>
+  <circle cx="94" cy="132" r="20" class="accent"/>
+  <rect x="78" y="174" width="32" height="44" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
+  <text x="126" y="128" class="label">本地交互</text>
+  <text x="126" y="152" class="small">OLED 显示</text>
+  <text x="126" y="172" class="small">SIQ-02FVS3 编码器</text>
+  <text x="126" y="192" class="small">蜂鸣器反馈</text>
+
+  <rect x="308" y="70" width="250" height="205" rx="16" class="card"/>
+  <rect x="360" y="112" width="146" height="82" rx="12" class="chip"/>
+  <text x="384" y="148" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">CH32V003</text>
+  <text x="374" y="172" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="11" fill="#ccfbf1">状态机 + Modbus</text>
+  <text x="334" y="226" class="label">固件</text>
+  <text x="334" y="250" class="small">20 ms 应用循环，Flash 参数，WFI 空闲</text>
+
+  <rect x="632" y="90" width="170" height="154" rx="14" class="card"/>
+  <rect x="674" y="122" width="86" height="58" rx="10" class="warn"/>
+  <text x="687" y="156" font-family="Microsoft YaHei, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">GP8630</text>
+  <text x="660" y="210" class="label">模拟量输出</text>
+  <text x="660" y="232" class="small">0-10 V / 4-20 mA</text>
+
+  <rect x="330" y="300" width="230" height="36" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/>
+  <text x="358" y="323" class="label">USB-C / CH340N / Modbus</text>
+  <rect x="608" y="300" width="222" height="36" rx="18" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="636" y="323" class="label">网页上位机：modusignal</text>
+
+  <path d="M 242 164 C 265 164, 280 164, 306 164" class="wire"/>
+  <path d="M 558 164 C 588 164, 602 164, 630 164" class="wire"/>
+  <path d="M 520 275 C 554 298, 570 318, 606 318" class="wire"/>
+  <text x="252" y="146" class="small">按键 / 编码器</text>
+  <text x="575" y="146" class="small">I2C</text>
+</svg>

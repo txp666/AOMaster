@@ -1,0 +1,15 @@
+demo/
+obj/
+*.o
+*.d
+*.elf
+*.hex
+*.lst
+*.map
+*.siz
+callgraph.dot
+
+.env
+.vscode/
+.mrs/
+tools/

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="330" viewBox="0 0 960 330" role="img" aria-labelledby="title desc">
+  <title id="title">AOMaster host connection</title>
+  <desc id="desc">Connection diagram from browser host through a Type-C data cable, onboard USB-C, and CH340N to AOMaster CH32V003 USART1 pins.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .chip { fill: #0f766e; }
+      .usb { fill: #dbeafe; stroke: #93c5fd; }
+      .screen { fill: #111827; }
+      .label { font: 700 16px Segoe UI, Arial, sans-serif; fill: #0f172a; }
+      .small { font: 12px Segoe UI, Arial, sans-serif; fill: #64748b; }
+      .code { font: 700 13px Consolas, monospace; fill: #0f172a; }
+      .wire { stroke: #475569; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .rx { stroke: #2563eb; }
+      .tx { stroke: #dc2626; }
+    </style>
+  </defs>
+  <rect width="960" height="330" rx="24" fill="#f8fafc"/>
+  <text x="38" y="44" class="label">Browser host connection from the schematic</text>
+
+  <rect x="54" y="86" width="214" height="142" rx="16" class="card"/>
+  <rect x="82" y="114" width="158" height="84" rx="8" class="screen"/>
+  <rect x="100" y="132" width="122" height="14" rx="4" fill="#0f766e"/>
+  <rect x="100" y="160" width="96" height="10" rx="4" fill="#334155"/>
+  <rect x="100" y="180" width="114" height="10" rx="4" fill="#334155"/>
+  <text x="88" y="254" class="label">Chrome / Edge</text>
+  <text x="88" y="276" class="small">modusignal AOMaster page</text>
+
+  <rect x="334" y="100" width="128" height="94" rx="14" class="usb"/>
+  <text x="374" y="136" class="label">USB-C</text>
+  <text x="364" y="162" class="small">USB1 connector</text>
+  <text x="360" y="182" class="small">USB_DP / USB_DN</text>
+
+  <rect x="548" y="88" width="150" height="118" rx="14" class="card"/>
+  <rect x="584" y="114" width="78" height="48" rx="8" class="chip"/>
+  <text x="596" y="144" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff">CH340N</text>
+  <text x="578" y="184" class="code">TXD / RXD</text>
+
+  <rect x="770" y="74" width="150" height="150" rx="16" class="card"/>
+  <rect x="796" y="104" width="104" height="56" rx="10" fill="#0f766e"/>
+  <text x="808" y="138" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">CH32V003</text>
+  <text x="800" y="188" class="code">PD6 RXD</text>
+  <text x="800" y="210" class="code">PD5 TXD</text>
+
+  <path d="M 268 152 C 292 152, 306 152, 332 152" class="wire"/>
+  <path d="M 462 150 C 498 150, 512 150, 546 150" class="wire"/>
+  <path d="M 698 188 C 728 188, 744 188, 768 188" class="wire tx"/>
+  <path d="M 698 210 C 728 210, 744 210, 768 210" class="wire rx"/>
+  <text x="266" y="136" class="small">Type-C data cable</text>
+  <text x="480" y="132" class="small">D+ / D-</text>
+  <text x="700" y="174" class="small">TXD -> RXD</text>
+  <text x="700" y="234" class="small">RXD &lt;- TXD</text>
+
+  <rect x="220" y="268" width="520" height="30" rx="15" fill="#e0f2fe" stroke="#7dd3fc"/>
+  <text x="260" y="288" class="small">Serial defaults exposed to Web Serial: 115200 baud, 8N1, no flow control</text>
+</svg>

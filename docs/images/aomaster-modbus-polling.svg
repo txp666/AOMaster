@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="340" viewBox="0 0 960 340" role="img" aria-labelledby="title desc">
+  <title id="title">AOMaster Modbus polling</title>
+  <desc id="desc">Modbus RTU polling reads registers 0x0000 through 0x0006 and plots the actual output with a mode-dependent Y axis.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .label { font: 700 16px Segoe UI, Arial, sans-serif; fill: #0f172a; }
+      .small { font: 12px Segoe UI, Arial, sans-serif; fill: #64748b; }
+      .code { font: 700 13px Consolas, monospace; fill: #0f172a; }
+      .wire { stroke: #64748b; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .blue { fill: #dbeafe; stroke: #93c5fd; }
+      .green { fill: #dcfce7; stroke: #86efac; }
+      .amber { fill: #fef3c7; stroke: #fcd34d; }
+    </style>
+  </defs>
+  <rect width="960" height="340" rx="24" fill="#f8fafc"/>
+  <text x="38" y="44" class="label">Modbus RTU polling contract</text>
+
+  <rect x="52" y="92" width="228" height="86" rx="14" class="card"/>
+  <text x="76" y="124" class="label">Host request</text>
+  <text x="76" y="154" class="code">01 03 00 00 00 07 04 08</text>
+
+  <rect x="366" y="72" width="228" height="126" rx="14" class="card"/>
+  <text x="390" y="104" class="label">AOMaster response</text>
+  <text x="390" y="132" class="small">7 holding registers</text>
+  <text x="390" y="158" class="code">0x0000 SIGNAL_TYPE</text>
+  <text x="390" y="180" class="code">0x0006 ACTUAL</text>
+
+  <rect x="690" y="92" width="220" height="86" rx="14" class="card"/>
+  <text x="714" y="124" class="label">Chart update</text>
+  <text x="714" y="150" class="small">value = ACTUAL / 1000</text>
+
+  <path d="M 282 136 C 316 136, 330 136, 364 136" class="wire"/>
+  <path d="M 596 136 C 632 136, 650 136, 688 136" class="wire"/>
+
+  <rect x="110" y="232" width="190" height="64" rx="14" class="blue"/>
+  <text x="136" y="258" class="label">Voltage response</text>
+  <text x="136" y="282" class="small">type=1, Y axis 0..10 V</text>
+
+  <rect x="384" y="232" width="190" height="64" rx="14" class="green"/>
+  <text x="410" y="258" class="label">Current response</text>
+  <text x="410" y="282" class="small">type=0, Y axis 4..20 mA</text>
+
+  <rect x="658" y="232" width="190" height="64" rx="14" class="amber"/>
+  <text x="684" y="258" class="label">Strict parser</text>
+  <text x="684" y="282" class="small">single-register replies ignored</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">AOMaster hardware blocks</title>
+  <desc id="desc">A hardware wiring diagram for CH32V003, OLED, GP8630B, Meishangmei SIQ-02FVS3 encoder, buzzer, USB-C, CH340N, and host UART.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .box { fill: #fff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .mcu { fill: #0f766e; stroke: #0f766e; }
+      .head { font: 700 18px Segoe UI, Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 14px Segoe UI, Arial, sans-serif; fill: #334155; }
+      .small { font: 12px Segoe UI, Arial, sans-serif; fill: #64748b; }
+      .pin { font: 700 12px Consolas, monospace; fill: #0f172a; }
+      .wire { stroke: #475569; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .bus { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="960" height="420" rx="24" class="bg"/>
+  <text x="38" y="44" class="head">Hardware blocks and default pins</text>
+
+  <rect x="370" y="112" width="220" height="188" rx="16" class="mcu"/>
+  <text x="420" y="150" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#fff">CH32V003F4U6</text>
+  <text x="420" y="178" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#ccfbf1">48 MHz firmware core</text>
+  <text x="396" y="220" class="pin" fill="#fff">PC2 SCL</text>
+  <text x="396" y="244" class="pin" fill="#fff">PC1 SDA</text>
+  <text x="396" y="268" class="pin" fill="#fff">PD5 TX / PD6 RX</text>
+
+  <rect x="66" y="82" width="190" height="94" rx="14" class="box"/>
+  <text x="94" y="118" class="label">SSD1306 OLED</text>
+  <text x="94" y="142" class="small">I2C address 0x78</text>
+  <text x="94" y="162" class="small">SCL=PC2, SDA=PC1</text>
+
+  <rect x="66" y="232" width="190" height="94" rx="14" class="box"/>
+  <text x="96" y="268" class="label">GP8630B-P20</text>
+  <text x="96" y="292" class="small">I2C address 0xB0..0xBE</text>
+  <text x="96" y="312" class="small">0-10 V / 4-20 mA output</text>
+
+  <rect x="704" y="72" width="190" height="100" rx="14" class="box"/>
+  <text x="724" y="108" class="label">Meishangmei encoder</text>
+  <text x="734" y="132" class="small">SIQ-02FVS3</text>
+  <text x="734" y="152" class="small">EC_A=PD4, EC_B=PD2</text>
+  <text x="734" y="170" class="small">EC_KEY=PD3</text>
+
+  <rect x="704" y="204" width="190" height="82" rx="14" class="box"/>
+  <text x="744" y="240" class="label">Buzzer</text>
+  <text x="744" y="264" class="small">PC0 GPIO tone</text>
+
+  <rect x="704" y="324" width="190" height="64" rx="14" class="box"/>
+  <text x="730" y="356" class="label">USB-C + CH340N</text>
+  <text x="730" y="378" class="small">onboard host UART</text>
+
+  <path d="M 256 130 C 300 130, 324 188, 368 210" class="bus"/>
+  <path d="M 256 280 C 300 280, 324 242, 368 228" class="bus"/>
+  <path d="M 592 154 C 640 140, 660 124, 702 122" class="wire"/>
+  <path d="M 592 226 C 644 230, 664 238, 702 244" class="wire"/>
+  <path d="M 592 268 C 646 294, 668 336, 702 356" class="wire"/>
+  <text x="284" y="116" class="small">I2C bus</text>
+  <text x="632" y="110" class="small">GPIO / EXTI</text>
+  <text x="628" y="278" class="small">USART1 via CH340N</text>
+</svg>
