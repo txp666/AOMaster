@@ -13,6 +13,8 @@
 #define TASK_APP_MS         20U
 #define TASK_HB_MS          1000U
 #define SYS_UART_BAUD       115200U
+#define SYS_BOOT_CHIME_FREQ 1200U
+#define SYS_BOOT_CHIME_MS   80U
 
 static volatile uint32_t s_tick_ms;
 
@@ -96,6 +98,7 @@ void System_Init(void)
     I2C_Bus_Init();
     Power_Init();
     Buzz_Init();
+    Buzz_Tone(SYS_BOOT_CHIME_FREQ, SYS_BOOT_CHIME_MS);
     Encoder_Init();
     App_Begin();
 

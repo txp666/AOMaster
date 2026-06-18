@@ -11,6 +11,7 @@
 #include "ch32v00x.h"
 
 #define APP_BOOT_DELAY_MS       100U
+#define APP_BOOT_DRAW_TICKS     32U
 #define APP_VOLT_FINE_STEP      (1U * SETTINGS_PERMILLE_SCALE)
 #define APP_VOLT_NORM_STEP      (10U * SETTINGS_PERMILLE_SCALE)
 #define APP_VOLT_FAST_STEP      (100U * SETTINGS_PERMILLE_SCALE)
@@ -1155,7 +1156,6 @@ static void App_BootUpdate(void)
         {
             SSD1306_SetContrast(Settings_Get()->brightness);
             LOGI("ssd1306 init ok\r\n");
-            s_app.draw_step = 0;
             s_app.state = APP_ST_OLED_DRAW;
         }
         else
@@ -1166,9 +1166,8 @@ static void App_BootUpdate(void)
         break;
 
     case APP_ST_OLED_DRAW:
-        Ui_DrawBootStep(s_app.draw_step);
-        s_app.draw_step++;
-        if(s_app.draw_step >= 4)
+        Ui_DrawBootStep(s_app.draw_step >> 3);
+        if(++s_app.draw_step >= APP_BOOT_DRAW_TICKS)
             s_app.state = APP_ST_GP8630_START;
         break;
 
