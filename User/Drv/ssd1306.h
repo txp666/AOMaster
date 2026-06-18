@@ -14,5 +14,6 @@ uint8_t SSD1306_Init(void);
 void SSD1306_SetContrast(uint8_t val);
 void SSD1306_Clear(void);
 void SSD1306_WriteLine(uint8_t page, const char *text);
+void SSD1306_WriteLine2x(uint8_t page, const char *text);
 
 #endif

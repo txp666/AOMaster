@@ -144,8 +144,8 @@ static AppCtx_t s_app;
 static AppUiCache_t s_ui;
 static AomSignalCtx_t s_sig;
 static uint8_t s_rx[AOM_RX_MAX];
-static uint8_t s_rx_len;
-static uint32_t s_rx_tick;
+static volatile uint8_t s_rx_len;
+static volatile uint32_t s_rx_tick;
 static uint32_t s_ui_tick;
 
 static void Signal_Init(void);

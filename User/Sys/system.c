@@ -106,7 +106,9 @@ void System_Run(void)
 {
     uint32_t next_hal = 0;
     uint32_t next_app = 0;
+#if AOMASTER_LOG_ENABLE
     uint32_t next_hb = 0;
+#endif
 
     while(1)
     {
@@ -128,6 +130,7 @@ void System_Run(void)
             next_app = now + TASK_APP_MS;
         }
 
+#if AOMASTER_LOG_ENABLE
         if((int32_t)(now - next_hb) >= 0)
         {
             LOGI("hb app=%s gp=%s addr=0x%02X i2c=%u err=%lu\r\n",
@@ -138,6 +141,7 @@ void System_Run(void)
                  (unsigned long)I2C_Bus_GetErrCount());
             next_hb = now + TASK_HB_MS;
         }
+#endif
 
         if(App_GetState() == APP_ST_RUN && I2C_Bus_IsIdle())
             Power_Idle();

@@ -168,12 +168,15 @@ int16_t Encoder_GetDiff(void)
     int16_t diff;
     int16_t raw;
 
+    __disable_irq();
     raw = s_enc_diff;
     diff = (int16_t)(raw / 2);
+    if(diff != 0)
+        s_enc_diff = 0;
+    __enable_irq();
 
     if(diff != 0)
     {
-        s_enc_diff = 0;
         Buzz_Tone(300, 5);
     }
 

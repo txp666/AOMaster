@@ -22,6 +22,20 @@ static void Ui_LineFlush(uint8_t page)
     SSD1306_WriteLine(page, s_line);
 }
 
+static void Ui_LineFlushCenter(uint8_t page)
+{
+    uint8_t len = s_pos;
+    uint8_t left;
+    uint8_t i;
+
+    left = (uint8_t)((UI_COLS - len) / 2U);
+    for(i = len; i > 0U; i--)
+        s_line[left + i - 1U] = s_line[i - 1U];
+    for(i = 0U; i < left; i++)
+        s_line[i] = ' ';
+    Ui_LineFlush(page);
+}
+
 static void Ui_PutChar(char c)
 {
     if(s_pos < UI_COLS)
@@ -307,52 +321,45 @@ void Ui_DrawHome(int16_t permille, GP8630_OutputMode_t mode, uint8_t gp_ok, uint
     static int16_t old_permille;
     static uint16_t old_step;
     static uint8_t old_mode;
-    static uint8_t old_gp;
     static uint8_t old_bar;
     static uint8_t valid;
     uint8_t mode_u8 = (uint8_t)mode;
     uint8_t bar = Ui_BarFill(permille);
 
+    (void)gp_ok;
+
     if(full_redraw)
         valid = 0;
 
-    if(!valid || old_gp != gp_ok)
+    if(!valid)
     {
-        Ui_LineBegin();
-        Ui_PutStr("AOMaster ");
-        Ui_PutStr(gp_ok ? "OK" : "N/A");
-        Ui_LineFlush(0);
+        Ui_WriteBlank(1);
+        Ui_WriteBlank(2);
+        Ui_WriteBlank(6);
     }
 
     if(!valid || old_mode != mode_u8)
     {
         Ui_LineBegin();
-        Ui_PutStr("Mode:");
         Ui_PutMode(mode);
-        Ui_LineFlush(1);
-        Ui_WriteBlank(5);
-        Ui_WriteText(7, "OK=Step L=Menu");
+        Ui_LineFlushCenter(0);
     }
 
     if(!valid || old_permille != permille || old_mode != mode_u8)
     {
         Ui_LineBegin();
-        Ui_PutStr("Val:");
         Ui_PutValue(permille, mode);
-        Ui_LineFlush(2);
-
-        Ui_LineBegin();
-        Ui_PutStr("Pct:");
-        Ui_PutPercent(permille);
-        Ui_LineFlush(3);
+        s_line[s_pos] = 0;
+        SSD1306_WriteLine2x(3, s_line);
     }
 
-    if(!valid || old_bar != bar)
+    if(!valid || old_permille != permille || old_bar != bar)
     {
         Ui_LineBegin();
-        Ui_PutStr("Bar:");
         Ui_PutBar(bar);
-        Ui_LineFlush(4);
+        Ui_PutChar(' ');
+        Ui_PutPercent(permille);
+        Ui_LineFlushCenter(5);
     }
 
     if(!valid || old_step != step_permille || old_mode != mode_u8)
@@ -360,13 +367,12 @@ void Ui_DrawHome(int16_t permille, GP8630_OutputMode_t mode, uint8_t gp_ok, uint
         Ui_LineBegin();
         Ui_PutStr("Step:");
         Ui_PutStepValue(step_permille, mode);
-        Ui_LineFlush(6);
+        Ui_LineFlushCenter(7);
     }
 
     old_permille = permille;
     old_step = step_permille;
     old_mode = mode_u8;
-    old_gp = gp_ok;
     old_bar = bar;
     valid = 1;
 }

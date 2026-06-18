@@ -162,3 +162,53 @@ void SSD1306_WriteLine(uint8_t page, const char *text)
     OLED_I2C_Stop();
     s_cache_valid = 1;
 }
+
+static uint8_t SSD1306_Expand4x2(uint8_t bits)
+{
+    bits &= 0x0FU;
+    bits = (uint8_t)((bits | (uint8_t)(bits << 2U)) & 0x33U);
+    bits = (uint8_t)((bits | (uint8_t)(bits << 1U)) & 0x55U);
+    return (uint8_t)(bits | (uint8_t)(bits << 1U));
+}
+
+static void SSD1306_WriteChar2xData(char c, uint8_t high)
+{
+    uint8_t i;
+    uint8_t bits;
+
+    for(i = 0U; i < 5U; i++)
+    {
+        bits = SSD1306_Font5x8[(uint8_t)c - 32U][i];
+        if(high)
+            bits >>= 4U;
+        bits = SSD1306_Expand4x2(bits);
+        OLED_I2C_Write(bits);
+        OLED_I2C_Write(bits);
+    }
+    OLED_I2C_Write(0x00);
+    OLED_I2C_Write(0x00);
+}
+
+void SSD1306_WriteLine2x(uint8_t page, const char *text)
+{
+    uint8_t len = 0U;
+    uint8_t left;
+    uint8_t p;
+    uint8_t i;
+
+    while(text[len])
+        len++;
+
+    left = (uint8_t)((SSD1306_WIDTH - (uint8_t)(len * SSD1306_CHAR_W * 2U)) / 2U);
+    for(p = 0U; p < 2U; p++)
+    {
+        SSD1306_ClearPage((uint8_t)(page + p));
+        SSD1306_SetPageCol((uint8_t)(page + p), left);
+        OLED_I2C_Start(SSD1306_I2C_ADDR);
+        OLED_I2C_Write(SSD1306_DATA);
+        for(i = 0U; i < len; i++)
+            SSD1306_WriteChar2xData(text[i], p);
+        OLED_I2C_Stop();
+    }
+    s_cache[page][0] = s_cache[page + 1U][0] = 0;
+}

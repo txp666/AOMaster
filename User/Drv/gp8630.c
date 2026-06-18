@@ -101,10 +101,6 @@ static void GP8630_OnTxDone(I2C_BusStatus_t status, void *ctx)
             s_ready = 1;
             LOGI("gp8630 init ok\r\n");
         }
-        else if(s_pending)
-        {
-            s_pending = 0;
-        }
     }
 
     s_tx_kind = G_TX_NONE;
@@ -177,15 +173,21 @@ void GP8630_Update(void)
 {
     uint8_t cmd;
     uint8_t payload[2];
+    uint16_t code;
 
     if(s_sm == G_SM_IDLE || s_sm == G_SM_READY || s_sm == G_SM_FAIL)
     {
         if(s_sm == G_SM_READY && s_pending && s_tx_kind == G_TX_NONE && I2C_Bus_IsIdle())
         {
-            payload[0] = (uint8_t)(s_pending_code & 0xFFU);
-            payload[1] = (uint8_t)(s_pending_code >> 8);
+            code = s_pending_code;
+            s_pending = 0;
+            payload[0] = (uint8_t)(code & 0xFFU);
+            payload[1] = (uint8_t)(code >> 8);
             if(GP8630_SubmitReg(GP8630_REG_DATA, payload, 2, G_TX_DATA))
+            {
+                s_pending = 1;
                 LOGE("gp8630 output submit fail\r\n");
+            }
         }
         return;
     }
