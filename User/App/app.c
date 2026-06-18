@@ -273,7 +273,12 @@ static uint16_t App_OutputCode(GP8630_OutputMode_t mode, int16_t permille)
         return 0;
 
     span = (uint32_t)cal->full_code - cal->zero_code;
-    code = (int32_t)cal->zero_code + ((int32_t)span * permille) / SETTINGS_PERMILLE_BASE;
+    if(mode == GP8630_OUT_CURR_20MA)
+        code = (int32_t)cal->zero_code + ((int32_t)span * permille) / SETTINGS_PERMILLE_BASE;
+    else
+        code = (int32_t)cal->zero_code +
+               ((int32_t)span * ((int32_t)permille - (SETTINGS_PERMILLE_BASE / 10L))) /
+               (SETTINGS_PERMILLE_BASE - (SETTINGS_PERMILLE_BASE / 10L));
     if(code < 0)
         return 0;
     if(code > (int32_t)GP8630_CODE_MAX)
@@ -385,29 +390,8 @@ static int16_t Signal_RawToPermille(uint8_t mode, uint16_t raw)
 
 static uint16_t Signal_CodeFromRaw(uint8_t mode, uint16_t raw)
 {
-    const SettingsCal_t *cal = Settings_GetCal(Signal_ToGpMode(mode));
-    uint32_t span;
-    int32_t code;
-
     raw = Signal_ClampRaw(mode, raw);
-    if(cal->full_code <= cal->zero_code)
-        return 0;
-
-    span = (uint32_t)cal->full_code - cal->zero_code;
-    if(Signal_IsVoltageMode(mode))
-    {
-        code = (int32_t)cal->zero_code + ((int32_t)span * raw) / 10000L;
-    }
-    else
-    {
-        code = (int32_t)cal->zero_code + ((int32_t)span * ((int32_t)raw - 4000L)) / 16000L;
-    }
-
-    if(code < 0)
-        return 0;
-    if(code > (int32_t)GP8630_CODE_MAX)
-        return GP8630_CODE_MAX;
-    return (uint16_t)code;
+    return App_OutputCode(Signal_ToGpMode(mode), Signal_RawToPermille(mode, raw));
 }
 
 static uint16_t Signal_SettingsRaw(void)
@@ -1049,7 +1033,7 @@ static void App_EnterCalZero(void)
     s_app.cal_full = cal->full_code;
     s_app.cal_err = 0;
 
-    if(GP8630_GetMode() != s_app.cal_mode)
+    if(!GP8630_IsReady() || GP8630_GetMode() != s_app.cal_mode)
     {
         s_app.view = VIEW_CAL_WAIT;
         GP8630_BeginInitWithMode(s_app.cal_mode);
@@ -1438,6 +1422,11 @@ static void App_HandleCalZero(int16_t diff, uint8_t click, uint8_t long_click)
 {
     if(long_click)
     {
+        if(GP8630_GetMode() != Settings_Get()->output_mode)
+        {
+            App_RestoreRunMode();
+            return;
+        }
         App_ApplyOutput();
         App_EnterCalMode();
         return;

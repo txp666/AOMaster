@@ -5,10 +5,11 @@
 #include <stddef.h>
 
 #define SETTINGS_FLASH_ADDR     0x08003FC0U
-#define SETTINGS_MAGIC          0xA05E0006U
+#define SETTINGS_MAGIC          0xA05E0007U
 #define SETTINGS_SAVE_DELAY_MS  500U
 #define SETTINGS_CAL_MIN_SPAN   1000U
 #define SETTINGS_FLASH_WORDS    16U
+#define SETTINGS_VOLT_1V_CODE_12V    5461U
 #define SETTINGS_VOLT_10V_CODE_12V   54613U
 #define SETTINGS_CURR_4MA_CODE_24MA  10923U
 #define SETTINGS_CURR_20MA_CODE_24MA 54613U
@@ -80,7 +81,7 @@ static void Settings_SetDefaultCal(SettingsCal_t *cal, uint8_t index)
     }
     else
     {
-        cal->zero_code = 0U;
+        cal->zero_code = SETTINGS_VOLT_1V_CODE_12V;
         cal->full_code = SETTINGS_VOLT_10V_CODE_12V;
     }
 }

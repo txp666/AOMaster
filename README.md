@@ -168,7 +168,7 @@ AOMaster 的上位机推荐使用 [modusignal](https://modusignal.cn/) 的 AOMas
 | --- | --- | --- |
 | `Output Mode` | 选择常规输出模式：`0-10V Volt` 或 `4-20mA Cur` | `Turn` 选择，`OK` 保存并重新初始化 GP8630，`L` 返回 |
 | `Signal Gen` | 本地信号发生器，配置输出类型、波形、低值、高值和周期 | `OK` 进入/结束编辑，`Turn` 调整，`L` 返回 |
-| `Calibrate` | 进入 0/10 V 或 4/20 mA 两点校准流程 | `Turn` 微调 DAC 码值，`OK` 下一步/保存，`L` 返回上一步 |
+| `Calibrate` | 进入 1/10 V 或 4/20 mA 两点校准流程 | `Turn` 微调 DAC 码值，`OK` 下一步/保存，`L` 返回上一步 |
 | `Brightness` | 调整 OLED 亮度 | `Turn` 调亮/调暗，`OK` 保存，`L` 放弃并恢复原亮度 |
 | `Status` | 查看 GP8630 状态、I2C 地址和 I2C 错误计数 | `OK` 或 `L` 返回主菜单 |
 | `Exit` | 退出菜单回到主界面 | `OK` 返回主界面 |

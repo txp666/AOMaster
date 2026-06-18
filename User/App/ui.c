@@ -405,7 +405,7 @@ void Ui_DrawCalModeMenu(uint8_t sel)
 {
     Ui_WriteText(0, "        CAL");
     Ui_WriteBlank(1);
-    Ui_WriteMenuItem(2, sel == 0U, "0V / 10V");
+    Ui_WriteMenuItem(2, sel == 0U, "1V / 10V");
     Ui_WriteBlank(3);
     Ui_WriteMenuItem(4, sel == 1U, "4mA / 20mA");
     Ui_WriteBlank(5);
@@ -423,7 +423,7 @@ void Ui_DrawCalAdjust(GP8630_OutputMode_t mode, uint8_t full_step, uint16_t code
     if(mode == GP8630_OUT_CURR_20MA)
         Ui_WriteText(1, full_step ? "HIGH 20mA" : "LOW 4mA");
     else
-        Ui_WriteText(1, full_step ? "HIGH 10V" : "LOW 0V");
+        Ui_WriteText(1, full_step ? "HIGH 10V" : "LOW 1V");
 
     Ui_WriteBlank(2);
     Ui_LineBegin();
@@ -445,7 +445,7 @@ void Ui_DrawCalSave(GP8630_OutputMode_t mode, uint16_t zero_code, uint16_t full_
 
     Ui_WriteBlank(1);
     Ui_LineBegin();
-    Ui_PutStr("Z:");
+    Ui_PutStr("L:");
     Ui_PutCode(zero_code);
     Ui_PutStr(" F:");
     Ui_PutCode(full_code);

@@ -166,7 +166,7 @@ Main menu items:
 | --- | --- | --- |
 | `Output Mode` | Select normal output mode: `0-10V Volt` or `4-20mA Cur` | `Turn` to select, `OK` to save and reinitialize GP8630, `L` to return |
 | `Signal Gen` | Local signal generator for output type, waveform, low value, high value, and period | `OK` to enter/finish editing, `Turn` to adjust, `L` to return |
-| `Calibrate` | Start 0/10 V or 4/20 mA two-point calibration | `Turn` to adjust the DAC code, `OK` for next/save, `L` for previous/back |
+| `Calibrate` | Start 1/10 V or 4/20 mA two-point calibration | `Turn` to adjust the DAC code, `OK` for next/save, `L` for previous/back |
 | `Brightness` | Adjust OLED brightness | `Turn` to change brightness, `OK` to save, `L` to cancel and restore the previous brightness |
 | `Status` | Show GP8630 status, I2C address, and I2C error count | `OK` or `L` returns to the main menu |
 | `Exit` | Leave the menu and return to the home screen | `OK` returns home |
